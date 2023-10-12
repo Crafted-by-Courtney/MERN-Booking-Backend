@@ -24,7 +24,7 @@ export default function NavBarSearch() {
         />
       </div>
       <div className="date-picker">
-      <DataRangePicker placeholder="Date" size="lg" />
+      <DateRangePicker placeholder="Date" size="lg" />
       </div>
       <div className="select">
         <Select

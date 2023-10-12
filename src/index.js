@@ -14,7 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <div classname="mx-12 px-3">
+      <div className="mx-12 px-3">
         <Cards />
       </div>
     </div>
