@@ -1,3 +1,5 @@
+//imports various modules and components at the top of the file, including Head, Image, styles, Navbar, useSWR, and Cards.
+
 import Head from "next/head";
 import Image from "next/image";
 import styles from "./styles/Home.module.css";

@@ -1,20 +1,20 @@
-import useSWR from "swr";
-import House from "./House";
+// House.js or House.jsx
+import React from "react";
 
-export default function Cards() {
-  const { data: houses } = useSWR(`/api/house/getAll`);
-
+export default function House({ country, price, address }) {
   return (
-    <div className="pt-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {houses?.map((house) => (
-          <House
-            key={house.id}
-            country={house.country}
-            price={house.price}
-            address={house.address}
-          />
-        ))}
+    <div className="p-6">
+      <div className="relative">
+        <img src="/house.jpg" className="object-cover rounded-2xl" alt="House" />
+        <div className="absolute text-black font-bold bottom-6 text-xl ml-2">
+          {country}
+        </div>
+      </div>
+      <div className="flex justify-between">
+        <div>
+          <p className="font-semibold">$ {price}</p>
+          <p>{address}</p>
+        </div>
       </div>
     </div>
   );
