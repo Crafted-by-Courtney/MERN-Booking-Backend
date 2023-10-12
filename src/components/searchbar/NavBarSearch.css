@@ -1,0 +1,41 @@
+.navbar-search-container {
+    display: flex;
+    justify-content: center;
+    border: 2px solid #3182ce;
+    border-radius: 10px;
+    height: 100%;
+  }
+  
+  .filter-button {
+    width: 20%;
+  }
+  
+  .filter-button-inner {
+    width: 100%;
+    background-color: #374151;
+    border-radius: 0;
+  }
+  
+  .autocomplete {
+    width: 30%;
+    height: 100%;
+  }
+  
+  .date-picker {
+    width: 30%;
+    display: none; /* Set to visible on larger screens */
+  }
+  
+  .select {
+    width: 20%;
+  }
+  
+  .search-button {
+    width: 20%;
+  }
+  
+  .search-button-inner {
+    background-color: #000;
+    border-radius: 0;
+  }
+  
