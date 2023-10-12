@@ -1,15 +1,16 @@
-import databaseLink from "utilities/database";
 import userM from "models/userM";
-import { getSession } from "next-auth/react";
+import databaseLink from "utilities/database";
 
 export default async function getUser(req, res) {
-  await databaseLink();
-  const session = await getSession({ req });
-
   try {
+    // Establish the database connection by calling the function
+    await databaseLink();
+    
+    const session = await getSession({ req });
     const result = await userM.findById(session.user.id);
     res.json(result);
   } catch (error) {
-    res.status(400).json({ status: "error", message: "test" });
+    console.error("Database connection or query error:", error);
+    res.status(500).json({ status: "error", message: "Internal Server Error" });
   }
 }

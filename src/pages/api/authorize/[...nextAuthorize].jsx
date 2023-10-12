@@ -16,72 +16,55 @@ export default NextAuth({
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
-        try {
-          await databaseLink();
-          const user = await userM.findOne({ email: credentials.email });
+        await databaseLink();
+        const user = await userM.findOne({ email: credentials.email });
 
-          if (!user) {
-            throw new Error("Email-exists");
-          }
-
-          const passwordCheck = await bcrypt.compare(
-            credentials.password,
-            user.password
-          );
-
-          if (!passwordCheck) {
-            throw new Error("Password-fail");
-          }
-
-          return {
-            id: user._id.toString(),
-            email: user.email,
-            name: user.name,
-            role: user.role,
-          };
-        } catch (error) {
-          throw error;
+        if (!user) {
+          // Use a more descriptive error message, e.g., "User not found"
+          throw new Error("Email-exists");
         }
+
+        const passwordCheck = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
+
+        if (!passwordCheck) {
+          // Use a more descriptive error message, e.g., "Incorrect password"
+          throw new Error("Password-fail");
+        }
+
+        return {
+          id: user._id.toString(),
+          email: user.email,
+          name: user.name,
+          role: user.role,
+        };
       },
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      try {
-        if (newuser) {
-          user.id = newuser.id;
-          user.token = newuser.role;
-          return user;
-        } else {
-          return user;
-        }
-      } catch (error) {
-        throw error;
+    async signIn({ user, newuser }) {
+      // The user object is automatically returned; you can remove this block
+      if (newuser) {
+        user.id = newuser.id;
+        user.token = newuser.role;
       }
+      return user;
     },
 
-    async jwt({ token, user, account, profile, isNewUser }) {
-      try {
-        if (user) {
-          token.id = user.id;
-          token.role = user.role;
-          return token;
-        } else {
-          return token;
-        }
-      } catch (error) {
-        throw error;
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
       }
+      return token;
     },
 
-    async session({ session, user, token }) {
-      try {
-        session.user.id = token.id;
-        session.user.role = token.role;
-        return session;
-      } catch (error) {
-        throw error;
-      }
+    async session({ session, token }) {
+      session.user.id = token.id;
+      session.user.role = token.role;
+      return session;
     },
   },
 });

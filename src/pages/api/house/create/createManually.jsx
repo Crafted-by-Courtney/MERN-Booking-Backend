@@ -3,25 +3,27 @@ import houseM from "/models/houseM";
 import { getSession } from "next-auth/react";
 
 export default async function addHouse(req, res) {
-  await databaseLink;
-
-  const session = await getSession({ req });
-
   try {
+    // Establish the database connection by calling the function
+    await databaseLink();
+
+    const session = await getSession({ req });
+
     const body = req.body;
     console.log(body);
+
     const result = await new houseM({
       price: body?.price,
       description: body?.description,
       address: body?.address,
       country: body?.country,
     }).save();
+
     res.json(result);
   } catch (error) {
-    res.json({
+    res.status(500).json({
       status: "error",
-      message: "something went wrong",
+      message: "Something went wrong",
     });
   }
-  res.json();
 }

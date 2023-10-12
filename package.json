@@ -29,7 +29,8 @@
     "stream-browserify": "^3.0.0",
     "swr": "^2.2.4",
     "util": "^0.12.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "webpack": "^5.88.2"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -21,7 +21,7 @@ export default function Dropdown(props) {
             <IoMenu className="h-6 text-gray-600" />
           </Button>
         </Menu.Target>
-        <Menu.Dropdown classname="rounded-xl">
+        <Menu.Dropdown className="rounded-xl"> {/* Fixed typo in className */}
           <Menu.Item onClick={() => setLoginbar(!loginbar)}>Login</Menu.Item>
           <Menu.Item onClick={() => setCreateAccount(!createAccount)}>Create Account</Menu.Item>
         </Menu.Dropdown>
